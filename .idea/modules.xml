@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/build/build.iml" filepath="$PROJECT_DIR$/build/build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unrealPlugin.iml" filepath="$PROJECT_DIR$/unrealPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unrealPlugin-agent/unrealPlugin-agent.iml" filepath="$PROJECT_DIR$/unrealPlugin-agent/unrealPlugin-agent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unrealPlugin-common/unrealPlugin-common.iml" filepath="$PROJECT_DIR$/unrealPlugin-common/unrealPlugin-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unrealPlugin-server/unrealPlugin-server.iml" filepath="$PROJECT_DIR$/unrealPlugin-server/unrealPlugin-server.iml" />
+    </modules>
+  </component>
+</project>
