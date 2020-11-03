@@ -7,15 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="unrealPlugin-agent" />
-        <module name="unrealPlugin-common" />
         <module name="unrealPlugin-server" />
+        <module name="unrealPlugin-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="build" target="1.5" />
       <module name="unrealPlugin" target="1.5" />
-      <module name="unrealPlugin-agent" target="1.7" />
-      <module name="unrealPlugin-common" target="1.7" />
+      <module name="unrealPlugin-agent" target="8" />
+      <module name="unrealPlugin-common" target="8" />
       <module name="unrealPlugin-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>

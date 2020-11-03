@@ -1,45 +1,47 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public interface UATRunnerConstants {
     enum UETargetPlatform {
-        ANDROID,
-        HOLOLENS,
+        Android,
         HTML5,
+        HoloLens,
         IOS,
-        LINUX,
-        LUMIN,
-        MAC,
+        Linux,
+        Lumin,
+        MPX,
+        Mac,
         PS4,
-        QUAIL,
-        SWITCH,
-        TVOS,
+        PS5,
+        Quail,
+        Switch,
+        TvOS,
         UWP32,
         UWP64,
-        XBOXONE,
-        WIN32,
-        WIN64,
-        WINANVIL,
-        XBOXONEANVIL,
-        PS5,
-        MPX
+        Win32,
+        Win64,
+        WinAnvil,
+        XboxOne,
+        XboxOneAnvil
     }
 
     enum UEBuildConfiguration {
-        DEBUG,
-        DEBUGGAME,
-        DEVELOPMENT,
-        SHIPPING,
-        TEST
+        Debug,
+        DebugGame,
+        Development,
+        Shipping,
+        Test
     }
 
     String RUNNER_TYPE = "UATRunnerType";
     String DISPLAY_NAME = "Unreal Automation Tool";
     String DESCRIPTION = "Runs Unreal's UAT program";
 
-    String PRESET_KEY = "PRESET_A_KEY";
+    String PRESET_KEY = "PRESET";
 
     ArrayList<UATArgument> Arguments = new ArrayList<UATArgument>(Arrays.asList(
             new Arg_EnginePath(),
@@ -54,4 +56,16 @@ public interface UATRunnerConstants {
             new UATPreset_Stage(),
             new UATPreset_Package()
     ));
+
+    public static UATPreset GetPresetByName(String Name)
+    {
+        for(UATPreset preset : UATRunnerConstants.PRESETS)
+        {
+            if(preset.toString().equals(Name))
+            {
+                return preset;
+            }
+        }
+        return null;
+    }
 }

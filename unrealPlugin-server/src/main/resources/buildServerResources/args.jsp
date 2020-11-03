@@ -27,7 +27,7 @@
                     <c:set var="modeSelected" value="${propertiesBean.properties[arg]}"/>
                     <props:selectProperty name="${arg}" className="mediumField">
                         <c:forEach items="${arg.getOptions()}" var="option">
-                            <props:option value="${arg}.${option}" currValue="${modeSelected}">${option}</props:option>
+                            <props:option value="${option}" currValue="${modeSelected}">${option}</props:option>
                         </c:forEach>
                     </props:selectProperty>
                 </c:when>

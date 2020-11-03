@@ -3,7 +3,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UATPreset_Compile extends UATPreset {
+public class UATPreset_Compile extends UATPreset_BuildCookRun {
     UATPreset_Compile()
     {
         friendlyName = "Compile (C# tools)";

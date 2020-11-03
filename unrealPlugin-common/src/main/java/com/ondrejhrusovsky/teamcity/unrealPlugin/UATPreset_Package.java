@@ -3,7 +3,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UATPreset_Package extends UATPreset {
+public class UATPreset_Package extends UATPreset_BuildCookRun {
     UATPreset_Package()
     {
         friendlyName = "Package";

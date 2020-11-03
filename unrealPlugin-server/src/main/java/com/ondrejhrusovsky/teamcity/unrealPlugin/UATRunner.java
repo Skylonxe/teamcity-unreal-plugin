@@ -4,11 +4,13 @@ import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
 import jetbrains.buildServer.serverSide.RunTypeRegistry;
+import jetbrains.buildServer.util.Hash;
 import jetbrains.buildServer.web.openapi.PluginDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +65,25 @@ public class UATRunner extends RunType {
     @Nullable
     @Override
     public Map<String, String> getDefaultRunnerProperties() {
-        return null;
+        HashMap<String, String> result = new HashMap<>();
+        for(UATArgument arg : UATRunnerConstants.Arguments)
+        {
+            if(!arg.getDefaultValue().isEmpty())
+            {
+                result.put(arg.toString(), arg.getDefaultValue());
+            }
+        }
+        for(UATPreset preset : UATRunnerConstants.PRESETS)
+        {
+            for(UATArgument arg : preset.getArguments())
+            {
+                if(!arg.getDefaultValue().isEmpty())
+                {
+                    result.put(arg.toString(), arg.getDefaultValue());
+                }
+            }
+        }
+        return result;
     }
 
     @NotNull
