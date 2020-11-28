@@ -1,5 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.*;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
@@ -20,12 +21,27 @@ public class UATService extends BuildServiceAdapter {
     @NotNull
     @Override
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
-        final Path engineBaseDir = Paths.get(getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
-        final Path RunUAT = UAT.GetRunUATPath(engineBaseDir);
+        getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
+
         final String PresetName = getRunnerParameters().getOrDefault(UATRunnerConstants.PRESET_KEY, "");
+        HashMap<String, String> relevantRunnerParameters = new HashMap<>();
+        for(Map.Entry<String, String> param : getRunnerParameters().entrySet())
+        {
+            if(param.getKey().contains(PresetName) || !param.getKey().contains(UATPreset.class.getSimpleName()))
+            {
+                final String afterDot = param.getKey().substring(param.getKey().indexOf(".")+1);
+                relevantRunnerParameters.put(afterDot, param.getValue());
+            }
+        }
+
+        getLogger().message("Relevant runner parameters: " + relevantRunnerParameters.toString());
+
+        final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
+        final Path RunUAT = UATRunnerConstants.GetRunUATPath(engineBaseDir);
+
         final UATPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
-        final String UATArguments = Preset.makeArgumentsString(getRunnerParameters());
-        final Path uprojectFile = Paths.get(getRunnerParameters().get(Arg_UProjectFile.class.getSimpleName()));
+        final String UATArguments = Preset.makeArgumentsString(relevantRunnerParameters);
+        final Path uprojectFile = Paths.get(relevantRunnerParameters.get(Arg_UProjectFile.class.getSimpleName()));
 
         StringBuilder scriptContent = new StringBuilder(RunUAT.toString());
 
@@ -42,7 +58,7 @@ public class UATService extends BuildServiceAdapter {
             scriptContent.append('"');
         }
 
-        getLogger().message("Runner Parameters: " + getRunnerParameters().toString());
+
         getLogger().message("ScriptContent: " + scriptContent);
 
         final String script = getCustomScript(scriptContent.toString());

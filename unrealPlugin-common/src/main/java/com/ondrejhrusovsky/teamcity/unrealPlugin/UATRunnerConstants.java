@@ -1,5 +1,11 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.*;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Clean;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Compile;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_CompileEditor;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Ini;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -29,6 +35,22 @@ public interface UATRunnerConstants {
         XboxOneAnvil
     }
 
+    enum UECookTargetPlatform {
+        Android,
+        IOS,
+        PS4,
+        LinuxServer,
+        WindowsServer,
+        WindowsNoEditor,
+        XboxOne
+    }
+
+    enum UECookFlavors {
+        DXT,
+        ASTC,
+        ETC2
+    }
+
     enum UEBuildConfiguration {
         Debug,
         DebugGame,
@@ -46,7 +68,10 @@ public interface UATRunnerConstants {
     ArrayList<UATArgument> Arguments = new ArrayList<UATArgument>(Arrays.asList(
             new Arg_EnginePath(),
             new Arg_UProjectFile(),
-            new Arg_WarningsAsErrors()
+            new Arg_WarningsAsErrors(),
+            new Arg_Compile(),
+            new Arg_CompileEditor(),
+            new Arg_Ini()
     ));
 
     ArrayList<UATPreset> PRESETS = new ArrayList<UATPreset>(Arrays.asList(
@@ -67,5 +92,10 @@ public interface UATRunnerConstants {
             }
         }
         return null;
+    }
+
+    public static Path GetRunUATPath(Path BaseEngine)
+    {
+        return Paths.get(BaseEngine.toString(),"\\Engine\\Build\\BatchFiles\\RunUAT.bat");
     }
 }

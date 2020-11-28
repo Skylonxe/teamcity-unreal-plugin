@@ -38,7 +38,7 @@
                   <artifactId>teamcity-sdk-maven-plugin</artifactId>
                   <version>0.4.2</version>
                   <configuration>
-                      <teamcityDir>D:\Servers\TeamCity\Server_PluginDev</teamcityDir>
+                      <teamcityDir>E:\Servers\TeamCity\PluginDev</teamcityDir>
                   </configuration>
               </plugin>
           </plugins>

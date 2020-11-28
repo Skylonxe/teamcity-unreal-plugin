@@ -5,6 +5,13 @@ import java.util.Arrays;
 import java.util.Map;
 
 public abstract class UATPreset_BuildCookRun extends UATPreset {
+    UATPreset_BuildCookRun()
+    {
+        super();
+        arguments.addAll(Arrays.asList());
+    }
+
+
     public String makeArgumentsString(Map<String, String> params) {
         StringBuilder result = new StringBuilder("BuildCookRun");
 

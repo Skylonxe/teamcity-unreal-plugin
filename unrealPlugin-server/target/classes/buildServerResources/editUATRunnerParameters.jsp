@@ -1,6 +1,6 @@
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunnerConstants" %>
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UATArgument" %>
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_UProjectFile" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_UProjectFile" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
@@ -36,7 +36,7 @@
 </l:settingsGroup>
 
 
-<l:settingsGroup title="Preset Parameters">
+<l:settingsGroup title="<br>Preset Parameters<br><br>">
     <c:forEach items="<%=UATRunnerConstants.PRESETS%>" var="preset">
         <%@ include file="preset.jsp" %>
     </c:forEach>

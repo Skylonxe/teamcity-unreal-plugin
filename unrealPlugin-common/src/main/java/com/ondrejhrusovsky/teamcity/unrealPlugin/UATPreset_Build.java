@@ -1,5 +1,9 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.*;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Build.*;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -10,8 +14,8 @@ public class UATPreset_Build extends UATPreset_BuildCookRun {
         friendlyName = "Build (C++)";
         arguments = new ArrayList<UATArgument>(Arrays.asList(
                 new Arg_Clean(),
-                new Arg_Configuration(),
-                new Arg_Platforms()
+                new Arg_ClientConfig(),
+                new Arg_ClientTargetPlatform()
         ));
     }
 

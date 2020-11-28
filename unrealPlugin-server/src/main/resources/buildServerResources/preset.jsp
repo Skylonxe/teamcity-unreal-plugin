@@ -5,6 +5,7 @@
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
 
 <tbody id="${preset}">
+<c:set var="prefix" value="${preset}"/>
 <c:set var="arguments" value="${preset.getArguments()}"/>
 <%@ include file="args.jsp" %>
 </tbody>
