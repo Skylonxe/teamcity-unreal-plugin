@@ -1,8 +1,8 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
-public abstract class ArgBase_String extends UATArgument {
+public abstract class ArgBase_String extends CmdArgument {
     public int fieldSize = 56;
-    public int maxLength = 100;
+    public int maxLength = 999;
     public boolean allowPickFromVCS = false;
 
     public int getFieldSize() { return fieldSize; }

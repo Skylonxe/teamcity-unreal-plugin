@@ -12,7 +12,7 @@ public class UATPreset_Build extends UATPreset_BuildCookRun {
     UATPreset_Build()
     {
         friendlyName = "Build (C++)";
-        arguments = new ArrayList<UATArgument>(Arrays.asList(
+        arguments = new ArrayList<CmdArgument>(Arrays.asList(
                 new Arg_Clean(),
                 new Arg_ClientConfig(),
                 new Arg_ClientTargetPlatform()

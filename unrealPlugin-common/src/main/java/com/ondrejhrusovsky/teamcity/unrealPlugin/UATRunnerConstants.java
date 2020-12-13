@@ -1,7 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.*;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Clean;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Compile;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_CompileEditor;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Ini;
@@ -61,13 +60,12 @@ public interface UATRunnerConstants {
 
     String RUNNER_TYPE = "UATRunnerType";
     String DISPLAY_NAME = "Unreal Automation Tool";
-    String DESCRIPTION = "Runs Unreal's UAT program";
+    String DESCRIPTION = "Runs Unreal's multi-purpose automation tool.";
 
     String PRESET_KEY = "PRESET";
 
-    ArrayList<UATArgument> Arguments = new ArrayList<UATArgument>(Arrays.asList(
+    ArrayList<CmdArgument> Arguments = new ArrayList<CmdArgument>(Arrays.asList(
             new Arg_EnginePath(),
-            new Arg_UProjectFile(),
             new Arg_WarningsAsErrors(),
             new Arg_Compile(),
             new Arg_CompileEditor(),
@@ -75,6 +73,7 @@ public interface UATRunnerConstants {
     ));
 
     ArrayList<UATPreset> PRESETS = new ArrayList<UATPreset>(Arrays.asList(
+            new UATPreset_BuildGraph(),
             new UATPreset_Compile(),
             new UATPreset_Build(),
             new UATPreset_Cook(),
@@ -96,6 +95,6 @@ public interface UATRunnerConstants {
 
     public static Path GetRunUATPath(Path BaseEngine)
     {
-        return Paths.get(BaseEngine.toString(),"\\Engine\\Build\\BatchFiles\\RunUAT.bat");
+        return Paths.get(BaseEngine.toString(),"Engine\\Build\\BatchFiles\\RunUAT.bat");
     }
 }

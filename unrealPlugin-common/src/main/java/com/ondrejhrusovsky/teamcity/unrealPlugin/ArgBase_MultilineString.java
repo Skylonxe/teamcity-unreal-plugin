@@ -1,8 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
-import java.util.Map;
-
-public abstract class ArgBase_MultilineString extends UATArgument {
+public abstract class ArgBase_MultilineString extends CmdArgument {
     public int rowsNum = 10;
     public int colsNum = 58;
     public String linkTitle = "";

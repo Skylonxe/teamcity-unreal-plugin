@@ -4,5 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-autowire="constructor">
     <bean id="UATRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunner"/>
+    <bean id="UBTRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBTRunner"/>
+    <bean id="StoreUnrealManifestArtifacts" class="com.ondrejhrusovsky.teamcity.unrealPlugin.PublishUBTArtifacts"/>
 
 </beans>

@@ -13,6 +13,7 @@ public class Arg_Ini extends ArgBase_StringList {
                 "Example: Game:[/Script/UnrealEd.ProjectPackagingSettings]:BlueprintNativizationMethod=Disabled";
         helpLinks = Arrays.asList("https://bebylon.dev/ue4guide/packaging-cooking/selecting-maps-to-cook/");
         commandSeparator = " -ini:";
+        advanced = true;
     }
 
     @Override

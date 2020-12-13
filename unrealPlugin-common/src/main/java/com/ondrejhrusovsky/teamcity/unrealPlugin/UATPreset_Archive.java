@@ -7,7 +7,7 @@ public class UATPreset_Archive extends UATPreset_BuildCookRun {
     UATPreset_Archive()
     {
         friendlyName = "Archive (zip)";
-        arguments = new ArrayList<UATArgument>(Arrays.asList(
+        arguments = new ArrayList<CmdArgument>(Arrays.asList(
 
         ));
     }

@@ -41,7 +41,7 @@ public class UATService extends BuildServiceAdapter {
 
         final UATPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
         final String UATArguments = Preset.makeArgumentsString(relevantRunnerParameters);
-        final Path uprojectFile = Paths.get(relevantRunnerParameters.get(Arg_UProjectFile.class.getSimpleName()));
+        final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
         StringBuilder scriptContent = new StringBuilder(RunUAT.toString());
 

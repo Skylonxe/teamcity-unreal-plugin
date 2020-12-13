@@ -3,7 +3,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class ArgBase_BoolMatrix extends UATArgument {
+public abstract class ArgBase_BoolMatrix extends CmdArgument {
     public ArrayList<String> bools = new ArrayList<>();
     public int minWidth = 105;
     public String optionSeparator = "+";

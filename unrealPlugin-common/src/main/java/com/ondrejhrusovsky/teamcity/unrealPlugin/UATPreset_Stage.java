@@ -15,7 +15,7 @@ public class UATPreset_Stage extends UATPreset_BuildCookRun {
         friendlyName = "Stage";
         description = "Copies cooked assets, compiled binaries and other game files like configs into same folder, forming there final standalone application.";
 
-        arguments = new ArrayList<UATArgument>(Arrays.asList(
+        arguments = new ArrayList<CmdArgument>(Arrays.asList(
                 new Arg_Client(),
                 new Arg_DedicatedServer(),
                 new Arg_Pak(),

@@ -1,10 +1,9 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public abstract class UATPreset {
-    ArrayList<UATArgument> arguments = new ArrayList<UATArgument>();
+    ArrayList<CmdArgument> arguments = new ArrayList<CmdArgument>();
     String friendlyName = "Unknown preset";
     String description = "";
 
@@ -13,7 +12,7 @@ public abstract class UATPreset {
         super();
     }
 
-    public ArrayList<UATArgument> getArguments() { return arguments; }
+    public ArrayList<CmdArgument> getArguments() { return arguments; }
     public String getFriendlyName() { return friendlyName; }
     public String getDescription() { return description; }
 
@@ -24,7 +23,7 @@ public abstract class UATPreset {
 
     public String makeArgumentsString(Map<String, String> params) {
         StringBuilder result = new StringBuilder();
-        for(UATArgument arg : arguments)
+        for(CmdArgument arg : arguments)
         {
             String argStr = arg.makeArgumentString(params);
             if(argStr.length() > 0)
@@ -37,7 +36,7 @@ public abstract class UATPreset {
             }
         }
 
-        for(UATArgument arg : arguments)
+        for(CmdArgument arg : arguments)
         {
             String argStr = arg.makeArgumentStringFromCmdLine(params, result.toString());
             if(argStr.length() > 0)
@@ -53,11 +52,11 @@ public abstract class UATPreset {
         return result.toString();
     }
 
-    public void sortArguments(List<UATArgument> args)
+    public void sortArguments(List<CmdArgument> args)
     {
-        Map<String, List<UATArgument>> groupLists = new LinkedHashMap<>();
+        Map<String, List<CmdArgument>> groupLists = new LinkedHashMap<>();
 
-        for(UATArgument a : args)
+        for(CmdArgument a : args)
         {
             if(!groupLists.containsKey(a.getGroup()))
             {
@@ -67,10 +66,10 @@ public abstract class UATPreset {
             groupLists.get(a.getGroup()).add(a);
         }
 
-        List<UATArgument> result = new ArrayList<>();
+        List<CmdArgument> result = new ArrayList<>();
         args.clear();
 
-        for(List<UATArgument> group : groupLists.values())
+        for(List<CmdArgument> group : groupLists.values())
         {
             args.addAll(group);
         }
