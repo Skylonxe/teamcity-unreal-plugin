@@ -20,12 +20,17 @@
 
     <tr>
         <th>
-            <label for="publishManifestFiles">&#11169;&nbsp;&nbsp;&nbsp;&nbsp;Publish Manifest Files as Artifacts:</label>
+            <label for="publishManifestFiles">Publish Artifacts:</label>
         </th>
         <td>
-            <props:checkboxProperty name="publishManifestFiles"/>
+            <props:radioButtonProperty name="publishManifestFiles" value="no" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_no"/>
+            <label for="pmf_no">No</label>
+            <props:radioButtonProperty name="publishManifestFiles" value="yes" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes"/>
+            <label for="pmf_yes">Yes</label>
+            <props:radioButtonProperty name="publishManifestFiles" value="yes_zip" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes_zipped"/>
+            <label for="pmf_yes_zipped">Yes (zipped)</label>
             <span class="error" id="error_publishManifestFiles"></span>
-            <span class="smallNote">"Uploads files listed in the manifest to the teamcity server as artifacts."</span>
+            <span class="smallNote">Uploads UBT output files (compiled binaries) to the TeamCity server as artifacts. Optionally, it is possible to choose uploading artifacts as single zip archive what significantly lowers storage requirements and upload times but adds additional time for zipping.</span>
         </td>
     </tr>
 </l:settingsGroup>

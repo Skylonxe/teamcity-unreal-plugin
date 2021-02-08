@@ -9,6 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="unrealPlugin-agent" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
     <orderEntry type="module" module-name="unrealPlugin-common" />
     <orderEntry type="module" module-name="unrealPlugin-server" />
   </component>

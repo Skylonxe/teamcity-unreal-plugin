@@ -78,7 +78,8 @@ public interface UATRunnerConstants {
             new UATPreset_Build(),
             new UATPreset_Cook(),
             new UATPreset_Stage(),
-            new UATPreset_Package()
+            new UATPreset_Package(),
+            new UATPreset_Custom()
     ));
 
     public static UATPreset GetPresetByName(String Name)

@@ -73,6 +73,7 @@ public class UBTRunner extends RunType {
                 result.put(arg.toString(), arg.getDefaultValue());
             }
         }
+        result.put("publishManifestFiles", "no");
         return result;
     }
 
