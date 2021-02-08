@@ -8,7 +8,7 @@ public class Arg_UnversionedCookedContent extends ArgBase_Bool {
     public Arg_UnversionedCookedContent()
     {
         friendlyName = "Unversioned Content";
-        description = "Cooked assets will not have engine versioned stored and can be then loaded by any engine version (even uncompatible one).";
+        description = "Cooked assets will not have engine versioned stored and can be then loaded by any engine version (even uncompatible one). Unversioned content can not utilize iterative cooking.";
         group = "Assets";
     }
 
