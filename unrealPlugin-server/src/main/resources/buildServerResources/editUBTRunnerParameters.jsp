@@ -27,10 +27,12 @@
             <label for="pmf_no">No</label>
             <props:radioButtonProperty name="publishManifestFiles" value="yes" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes"/>
             <label for="pmf_yes">Yes</label>
-            <props:radioButtonProperty name="publishManifestFiles" value="yes_zip" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes_zipped"/>
-            <label for="pmf_yes_zipped">Yes (zipped)</label>
+            <props:radioButtonProperty name="publishManifestFiles" value="yes_zip" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes_zip"/>
+            <label for="pmf_yes_zip">Yes (zip archive)</label>
+            <props:radioButtonProperty name="publishManifestFiles" value="yes_7z" checked="${propertiesBean.properties[publishManifestFiles] == 0}" id="pmf_yes_7z"/>
+            <label for="pmf_yes_7z">Yes (7z archive)</label>
             <span class="error" id="error_publishManifestFiles"></span>
-            <span class="smallNote">Uploads UBT output files (compiled binaries) to the TeamCity server as artifacts. Optionally, it is possible to choose uploading artifacts as single zip archive what significantly lowers storage requirements and upload times but adds additional time for zipping.</span>
+            <span class="smallNote">Uploads UBT output files (compiled binaries) to the TeamCity server as artifacts. Optionally, it is possible to choose uploading artifacts as single archive what significantly lowers storage requirements and upload times but adds additional time for zipping.</span>
         </td>
     </tr>
 </l:settingsGroup>

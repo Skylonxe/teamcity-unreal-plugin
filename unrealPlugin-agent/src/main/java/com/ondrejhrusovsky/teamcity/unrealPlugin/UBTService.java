@@ -27,6 +27,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+enum ArtifactsFormat
+{
+    RAW,
+    ARCHIVE_ZIP,
+    ARCHIVE_7Z
+}
+
 public class UBTService extends BuildServiceAdapter {
 
     private final Set<File> myFilesToDelete = new HashSet<File>();
@@ -123,87 +130,63 @@ public class UBTService extends BuildServiceAdapter {
 
     public void publishArtifactsForThisStep()
     {
-        getLogger().message("##teamcity[blockOpened name='Publish UBT Artifacts']");
-
         final Path enginePath = Paths.get(getWorkingDirectory().getAbsolutePath() ,getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
         final Path manifestPath = Paths.get(getRunnerParameters().getOrDefault(Arg_Manifest.class.getSimpleName(), getDefaultManifestPath().toString()));
         final String publishManifestFiles = getRunnerParameters().getOrDefault("publishManifestFiles", "");
 
-        getLogger().message("Using manifest from " + manifestPath);
-        publishManifestArtifacts(enginePath, manifestPath, publishManifestFiles.contains("zip"));
+        ArtifactsFormat artifactsFormat = ArtifactsFormat.RAW;
 
-        getLogger().message("##teamcity[blockClosed name='Publish UBT Artifacts']");
+        if(publishManifestFiles.contains("zip"))
+        {
+            artifactsFormat = ArtifactsFormat.ARCHIVE_ZIP;
+        }
+        else if(publishManifestFiles.contains("7z"))
+        {
+            artifactsFormat = ArtifactsFormat.ARCHIVE_7Z;
+        }
+
+        getLogger().message("Collecting files for publishing from manifest " + manifestPath);
+        publishManifestArtifacts(enginePath, manifestPath, artifactsFormat);
     }
 
-    public void publishManifestArtifacts(Path enginePath, Path manifestPath, boolean zip)
+    public void publishManifestArtifacts(Path enginePath, Path manifestPath, ArtifactsFormat format)
     {
         final File xml = new File(manifestPath.toString());
         final List<Path> artifacts = parseArtifactsFromXML(xml);
 
-        if(zip)
+        getLogger().message("Staging UBT output files symlinks in temp folder, so it can be easily published");
+        final String outputDirName = "UBTOutput";
+        final Path UBTOutputDir = Paths.get(getBuildTempDirectory().getAbsolutePath(), outputDirName);
+
+        for(Path artifact : artifacts)
         {
-            getLogger().message("##teamcity[blockOpened name='Preparing files for zipping']");
-            getLogger().message("Creating UBT output files symlinks in temp folder, so it can be easily zipped");
-            final Path UBTOutputDir = Paths.get(getBuildTempDirectory().getAbsolutePath(), "UBTOutput");
+            final File artifactFile = new File(artifact.toString());
+            final File newDest = Paths.get(UBTOutputDir.toString(), enginePath.relativize(artifact).toString()).toFile();
 
-            for(Path artifact : artifacts)
-            {
-                final File artifactFile = new File(artifact.toString());
-                final File newDest = Paths.get(UBTOutputDir.toString(), enginePath.relativize(artifact).toString()).toFile();
-
-                newDest.getParentFile().mkdirs();
-
-                try {
-                    Files.createSymbolicLink(newDest.toPath(), artifact);
-                } catch (IOException e) {
-                    getLogger().exception(e);
-                }
-            }
-
-            final String stepIndexStr = getEnvironmentVariables().getOrDefault("unreal.UBT.stepIndex", "0");
-            int stepIndex = Integer.parseInt(stepIndexStr);
-
-            final String ZipToolFolder = getRunnerContext().getConfigParameters().get("teamcity.tool.7z");
-            final String ZipFileName = "UBT_" + getBuild().getBuildNumber() + "_" + stepIndex + ".zip";
-            final Path ZipPath = Paths.get(getBuildTempDirectory().toString(), ZipFileName);
-
-            getLogger().message("##teamcity[blockClosed name='Preparing files for zipping']");
-            getLogger().message("##teamcity[blockOpened name='Zipping']");
-            getLogger().message("Zipping output files using 7-zip located at: " + ZipToolFolder + " to archive " + ZipPath);
-
-            GeneralCommandLine cmd = new GeneralCommandLine();
-            cmd.setWorkDirectory(getCheckoutDirectory().getPath());
-            cmd.setExePath(ZipToolFolder + "\\7za.exe");
-            cmd.addParameter("a");
-            cmd.addParameter("-tzip");
-            cmd.addParameters(ZipPath.toAbsolutePath().toString());
-            cmd.addParameters(UBTOutputDir.toString() + "\\*");
-            getLogger().message(cmd.toString());
-            SimpleCommandLineProcessRunner.runCommand(cmd, null, new LongRunningProcessRunCallback());
-
-            getLogger().message("Zipping finished");
-            getLogger().message("##teamcity[blockClosed name='Zipping']");
+            newDest.getParentFile().mkdirs();
 
             try {
-                FileUtils.deleteDirectory(UBTOutputDir.toFile());
+                Files.createSymbolicLink(newDest.toPath(), artifact);
             } catch (IOException e) {
                 getLogger().exception(e);
             }
+        }
+
+        if(format == ArtifactsFormat.ARCHIVE_ZIP || format == ArtifactsFormat.ARCHIVE_7Z)
+        {
+            final String stepIndexStr = getEnvironmentVariables().getOrDefault("unreal.UBT.stepIndex", "0");
+            int stepIndex = Integer.parseInt(stepIndexStr);
+
+            final String archiveFormat = format == ArtifactsFormat.ARCHIVE_ZIP ? "zip" : "7z";
+            final String archiveFileName = "UBT_" + getBuild().getBuildNumber() + "_" + stepIndex + "." + archiveFormat;
 
             stepIndex++;
             getLogger().message("##teamcity[setParameter name='env.unreal.UBT.stepIndex' value='" + stepIndex +"']");
-            getLogger().message("##teamcity[publishArtifacts '" + ZipPath.toString() + "']");
+            getLogger().message("##teamcity[publishArtifacts '" + UBTOutputDir.toAbsolutePath().toString() + "/** => " + archiveFileName +"']");
         }
         else
         {
-            final List<String> teamcityArtifactPaths = new ArrayList<>();
-
-            for(Path artifact : artifacts)
-            {
-                teamcityArtifactPaths.add(artifact.toAbsolutePath() + " => " + enginePath.relativize(artifact.getParent()));
-            }
-
-            getLogger().message("##teamcity[publishArtifacts '" + String.join("\n", teamcityArtifactPaths) + "']");
+            getLogger().message("##teamcity[publishArtifacts '" + UBTOutputDir.toAbsolutePath().toString() + "/**']");
         }
     }
 
