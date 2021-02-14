@@ -1,4 +1,4 @@
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBTRunnerConstants" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>

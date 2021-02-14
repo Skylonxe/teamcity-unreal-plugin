@@ -1,7 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_BoolMatrix;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
 
 import java.util.Map;
 

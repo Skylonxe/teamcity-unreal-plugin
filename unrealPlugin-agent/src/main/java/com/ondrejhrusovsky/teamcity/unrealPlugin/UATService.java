@@ -27,7 +27,7 @@ public class UATService extends BuildServiceAdapter {
         HashMap<String, String> relevantRunnerParameters = new HashMap<>();
         for(Map.Entry<String, String> param : getRunnerParameters().entrySet())
         {
-            if(param.getKey().contains(PresetName) || !param.getKey().contains(UATPreset.class.getSimpleName()))
+            if(param.getKey().contains(PresetName) || !param.getKey().contains(CmdPreset.class.getSimpleName()))
             {
                 final String afterDot = param.getKey().substring(param.getKey().indexOf(".")+1);
                 relevantRunnerParameters.put(afterDot, param.getValue());
@@ -39,7 +39,7 @@ public class UATService extends BuildServiceAdapter {
         final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
         final Path RunUAT = UATRunnerConstants.GetRunUATPath(engineBaseDir);
 
-        final UATPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
+        final CmdPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
         final String UATArguments = Preset.makeArgumentsString(relevantRunnerParameters);
         final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 

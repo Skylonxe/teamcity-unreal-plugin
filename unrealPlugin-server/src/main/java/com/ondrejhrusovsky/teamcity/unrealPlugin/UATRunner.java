@@ -1,5 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
@@ -72,7 +73,7 @@ public class UATRunner extends RunType {
                 result.put(arg.toString(), arg.getDefaultValue());
             }
         }
-        for(UATPreset preset : UATRunnerConstants.PRESETS)
+        for(CmdPreset preset : UATRunnerConstants.PRESETS)
         {
             for(CmdArgument arg : preset.getArguments())
             {

@@ -1,4 +1,5 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;

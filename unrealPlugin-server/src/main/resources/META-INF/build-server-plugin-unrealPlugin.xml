@@ -5,6 +5,7 @@
        default-autowire="constructor">
     <bean id="UATRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunner"/>
     <bean id="UBTRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBTRunner"/>
+    <bean id="UEdRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdRunner"/>
     <bean id="StoreUnrealManifestArtifacts" class="com.ondrejhrusovsky.teamcity.unrealPlugin.PublishUBTArtifacts"/>
 
 </beans>

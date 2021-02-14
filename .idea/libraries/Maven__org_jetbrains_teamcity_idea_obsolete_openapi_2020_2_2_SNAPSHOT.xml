@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jetbrains.teamcity.idea:obsolete-openapi:2020.2.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/idea/obsolete-openapi/2020.2.2-SNAPSHOT/obsolete-openapi-2020.2.2-20210114.114306-4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/idea/obsolete-openapi/2020.2.2-SNAPSHOT/obsolete-openapi-2020.2.2-20210114.114306-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/teamcity/idea/obsolete-openapi/2020.2.2-SNAPSHOT/obsolete-openapi-2020.2.2-20210114.114306-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

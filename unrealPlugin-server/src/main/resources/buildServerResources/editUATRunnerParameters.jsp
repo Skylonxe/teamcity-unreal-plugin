@@ -1,4 +1,4 @@
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunnerConstants" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants" %>
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.CmdArgument" %>
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_UProjectFile" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>

@@ -1,10 +1,8 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Build;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_Select;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 
 public class Arg_ClientConfig extends ArgBase_Select {

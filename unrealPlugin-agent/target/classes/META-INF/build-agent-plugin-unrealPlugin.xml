@@ -6,5 +6,6 @@
        default-autowire="constructor">
     <bean id="UATFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UATFactory"/>
     <bean id="UBTFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBTFactory"/>
+    <bean id="UEdFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdFactory"/>
     <bean id="PublishUBTArtifactsAgent" class="com.ondrejhrusovsky.teamcity.unrealPlugin.PublishUBTArtifactsAgent"/>
 </beans>

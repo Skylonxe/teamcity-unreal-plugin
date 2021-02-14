@@ -1,5 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants;
 import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 import jetbrains.buildServer.serverSide.RunType;
@@ -80,6 +81,6 @@ public class UBTRunner extends RunType {
     @NotNull
     @Override
     public String describeParameters(@NotNull Map<String, String> parameters) {
-        return UBTRunnerConstants.GetUBTExePath(Paths.get("")) + " " + UBTRunnerConstants.parametersMapToCmdArgsString(parameters);
+        return UBTRunnerConstants.GetUBTExePath(Paths.get("")) + " " + Util.parametersMapToCmdArgsString(parameters, UBTRunnerConstants.Arguments);
     }
 }

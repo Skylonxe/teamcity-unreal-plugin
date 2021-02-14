@@ -1,7 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_BoolMatrix;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
 
 import java.util.Map;
 
