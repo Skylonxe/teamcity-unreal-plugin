@@ -1,6 +1,5 @@
-package com.ondrejhrusovsky.teamcity.unrealPlugin;
+package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;
@@ -21,7 +20,7 @@ public class UBTFactory implements CommandLineBuildServiceFactory {
             @NotNull
             @Override
             public String getType() {
-                return UBTRunnerConstants.RUNNER_TYPE;
+                return UBTConstants.get().getRunnerType();
             }
 
             @Override

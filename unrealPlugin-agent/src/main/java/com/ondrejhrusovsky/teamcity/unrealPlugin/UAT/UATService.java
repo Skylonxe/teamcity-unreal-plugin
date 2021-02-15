@@ -1,6 +1,6 @@
-package com.ondrejhrusovsky.teamcity.unrealPlugin;
+package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.*;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
@@ -23,7 +23,7 @@ public class UATService extends BuildServiceAdapter {
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
         getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
 
-        final String PresetName = getRunnerParameters().getOrDefault(UATRunnerConstants.PRESET_KEY, "");
+        final String PresetName = getRunnerParameters().getOrDefault(UATConstants.get().getPresetKey(), "");
         HashMap<String, String> relevantRunnerParameters = new HashMap<>();
         for(Map.Entry<String, String> param : getRunnerParameters().entrySet())
         {
@@ -37,10 +37,9 @@ public class UATService extends BuildServiceAdapter {
         getLogger().message("Relevant runner parameters: " + relevantRunnerParameters.toString());
 
         final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
-        final Path RunUAT = UATRunnerConstants.GetRunUATPath(engineBaseDir);
-
-        final CmdPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
-        final String UATArguments = Preset.makeArgumentsString(relevantRunnerParameters);
+        final Path RunUAT = UATConstants.get().GetExePath(engineBaseDir);
+        final CmdPreset preset = UATConstants.get().getPresetByName(PresetName);
+        final String UATArguments = preset.makeArgumentsString(relevantRunnerParameters);
         final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
         StringBuilder scriptContent = new StringBuilder(RunUAT.toString());

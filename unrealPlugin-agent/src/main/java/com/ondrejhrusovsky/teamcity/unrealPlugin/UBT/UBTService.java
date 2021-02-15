@@ -1,8 +1,7 @@
-package com.ondrejhrusovsky.teamcity.unrealPlugin;
+package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_EnginePath;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.Arg_Manifest;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Util;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
@@ -40,8 +39,8 @@ public class UBTService extends BuildServiceAdapter {
         getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
 
         final Path engineBaseDir = Paths.get(getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
-        final Path UBTExe = UBTRunnerConstants.GetUBTExePath(engineBaseDir);
-        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), UBTRunnerConstants.Arguments);
+        final Path UBTExe = UBTConstants.get().GetExePath(engineBaseDir);
+        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), UBTConstants.get().getGlobalArguments());
 
         StringBuilder scriptContent = new StringBuilder(UBTExe.toString());
 

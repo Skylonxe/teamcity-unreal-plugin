@@ -4,8 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
        default-autowire="constructor">
-    <bean id="UATFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UATFactory"/>
-    <bean id="UBTFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBTFactory"/>
+    <bean id="UATFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATFactory"/>
+    <bean id="UBTFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTFactory"/>
     <bean id="UEdFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdFactory"/>
-    <bean id="PublishUBTArtifactsAgent" class="com.ondrejhrusovsky.teamcity.unrealPlugin.PublishUBTArtifactsAgent"/>
 </beans>

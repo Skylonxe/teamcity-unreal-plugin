@@ -1,4 +1,4 @@
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTConstants" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
@@ -15,7 +15,7 @@
 </style>
 
 <l:settingsGroup title="UBT Runner Parameters">
-    <c:set var="arguments" value="<%=UBTRunnerConstants.Arguments%>"/>
+    <c:set var="arguments" value="<%=UBTConstants.Arguments%>"/>
     <%@ include file="args.jsp" %>
 
     <tr>

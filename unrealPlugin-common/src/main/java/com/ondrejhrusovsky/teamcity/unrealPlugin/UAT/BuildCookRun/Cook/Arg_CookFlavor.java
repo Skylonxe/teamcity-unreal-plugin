@@ -1,7 +1,8 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_BoolMatrix;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UnrealTypes;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class Arg_CookFlavor extends ArgBase_BoolMatrix {
         advanced = false;
         group = "Assets";
 
-        for(UATRunnerConstants.UECookFlavors v : UATRunnerConstants.UECookFlavors.values())
+        for(UnrealTypes.UECookFlavors v : UnrealTypes.UECookFlavors.values())
         {
             bools.add(v.name());
         }

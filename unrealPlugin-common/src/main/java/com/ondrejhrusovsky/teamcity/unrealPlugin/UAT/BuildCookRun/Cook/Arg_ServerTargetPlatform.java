@@ -1,7 +1,8 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_BoolMatrix;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UnrealTypes;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class Arg_ServerTargetPlatform extends ArgBase_BoolMatrix {
         required = false;
         advanced = false;
 
-        for(UATRunnerConstants.UETargetPlatform v : UATRunnerConstants.UETargetPlatform.values())
+        for(UnrealTypes.UETargetPlatform v : UnrealTypes.UETargetPlatform.values())
         {
             bools.add(v.name());
         }

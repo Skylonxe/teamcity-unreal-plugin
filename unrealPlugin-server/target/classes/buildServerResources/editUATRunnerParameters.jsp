@@ -1,4 +1,4 @@
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATConstants" %>
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.CmdArgument" %>
 <%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_UProjectFile" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
 
-<c:set var="argument_preset" value="<%=UATRunnerConstants.PRESET_KEY%>"/>
+<c:set var="argument_preset" value="<%=UATConstants.PRESET_KEY%>"/>
 
 <style type="text/css">
     #bool_matrix {
@@ -19,7 +19,7 @@
 </style>
 
 <l:settingsGroup title="UAT Runner Parameters">
-    <c:set var="arguments" value="<%=UATRunnerConstants.Arguments%>"/>
+    <c:set var="arguments" value="<%=UATConstants.Arguments%>"/>
     <%@ include file="args.jsp" %>
     <tr>
         <th>
@@ -27,7 +27,7 @@
         </th>
         <td>
             <props:selectProperty name="${argument_preset}" onchange="BS.UATRunner.onModeChanged()" enableFilter="true" className="mediumField">
-                <c:forEach items="<%=UATRunnerConstants.PRESETS%>" var="preset">
+                <c:forEach items="<%=UATConstants.PRESETS%>" var="preset">
                     <props:option value="${preset}" currValue="${modeSelected}">${preset.getFriendlyName()}</props:option>
                 </c:forEach>
             </props:selectProperty>
@@ -37,7 +37,7 @@
 
 
 <l:settingsGroup title="<br>Preset Parameters<br><br>">
-    <c:forEach items="<%=UATRunnerConstants.PRESETS%>" var="preset">
+    <c:forEach items="<%=UATConstants.PRESETS%>" var="preset">
         <%@ include file="preset.jsp" %>
     </c:forEach>
 </l:settingsGroup>
@@ -49,7 +49,7 @@
       var sel = $('${argument_preset}');
       var selectedValue = sel[sel.selectedIndex].value;
 
-      <c:forEach items="<%=UATRunnerConstants.PRESETS%>" var="preset">
+      <c:forEach items="<%=UATConstants.PRESETS%>" var="preset">
         BS.Util.hide('${preset}');
       </c:forEach>
 

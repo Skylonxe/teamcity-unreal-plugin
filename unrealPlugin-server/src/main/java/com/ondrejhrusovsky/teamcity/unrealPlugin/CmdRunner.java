@@ -16,7 +16,7 @@ import java.util.Map;
 
 public abstract class CmdRunner extends RunType {
     private PluginDescriptor descriptor;
-    CmdPresetConstants constants;
+    CmdRunnerConstants constants;
 
     public CmdRunner(RunTypeRegistry registry, PluginDescriptor descriptor)
     {
@@ -24,7 +24,7 @@ public abstract class CmdRunner extends RunType {
         this.descriptor = descriptor;
     }
 
-    public abstract CmdPresetConstants getConstants();
+    public abstract CmdRunnerConstants getConstants();
 
     @NotNull
     @Override

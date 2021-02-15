@@ -1,5 +1,4 @@
-package com.ondrejhrusovsky.teamcity.unrealPlugin;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
+package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 import jetbrains.buildServer.agent.AgentBuildRunnerInfo;
 import jetbrains.buildServer.agent.BuildAgentConfiguration;
 import jetbrains.buildServer.agent.runner.CommandLineBuildService;
@@ -20,7 +19,7 @@ public class UATFactory implements CommandLineBuildServiceFactory {
             @NotNull
             @Override
             public String getType() {
-                return UATRunnerConstants.RUNNER_TYPE;
+                return UATConstants.get().getRunnerType();
             }
 
             @Override

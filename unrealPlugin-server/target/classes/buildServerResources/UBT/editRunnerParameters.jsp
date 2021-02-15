@@ -1,22 +1,15 @@
-<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunnerConstants" %>
+<%@ page import="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTConstants" %>
 <%@ taglib prefix="props" tagdir="/WEB-INF/tags/props" %>
 <%@ taglib prefix="bs" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="forms" tagdir="/WEB-INF/tags/forms" %>
 
-<style type="text/css">
-    #bool_matrix {
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 400px;
-        font-size: 8pt;
-    }
-</style>
+<%@ include file="../styles.jsp" %>
 
 <l:settingsGroup title="UBT Runner Parameters">
-    <c:set var="arguments" value="<%=UBTRunnerConstants.Arguments%>"/>
-    <%@ include file="args.jsp" %>
+    <c:set var="arguments" value="<%=UBTConstants.get().getGlobalArguments()%>"/>
+    <%@ include file="../args.jsp" %>
 
     <tr>
         <th>

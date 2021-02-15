@@ -1,7 +1,8 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Build;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_Select;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunnerConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UnrealTypes;
 
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public class Arg_ServerConfig extends ArgBase_Select {
         friendlyName = "Server Configuration";
         description = "See Unreal Engine docs (Build Configurations Reference) for details.";
 
-        for (UATRunnerConstants.UEBuildConfiguration v : UATRunnerConstants.UEBuildConfiguration.values()) {
+        for (UnrealTypes.UEBuildConfiguration v : UnrealTypes.UEBuildConfiguration.values()) {
             options.add(v.name());
         }
     }

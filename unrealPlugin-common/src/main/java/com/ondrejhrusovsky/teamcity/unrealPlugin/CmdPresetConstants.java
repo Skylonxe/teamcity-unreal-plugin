@@ -4,13 +4,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public abstract class CmdPresetConstants {
-    public abstract String getShortName();
-    public String getRunnerType() { return this.getClass().getSimpleName(); }
-    public abstract  String getDisplayName();
-    public abstract String getDescription();
-    public String getPresetKey() { return "PRESET_KEY"; }
-    public abstract List<CmdArgument> getGlobalArguments();
+public abstract class CmdPresetConstants extends CmdRunnerConstants {
+    public String getPresetKey() { return "PRESET"; }
     public abstract List<CmdPreset> getPresets();
-    public abstract Path GetExePath(Path EngineRootFolder);
+
+    public CmdPreset getPresetByName(String Name)
+    {
+        for(CmdPreset preset : getPresets())
+        {
+            if(preset.toString().equals(Name))
+            {
+                return preset;
+            }
+        }
+        return null;
+    }
 }
