@@ -1,12 +1,12 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdArgument;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPresetConstants;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Compile;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_CompileEditor;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Ini;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTConstants;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -65,7 +65,7 @@ public class UATConstants extends CmdPresetConstants {
     }
 
     @Override
-    public Path GetExePath(Path EngineRootFolder) {
+    public Path getExePath(Path EngineRootFolder) {
         return Paths.get(EngineRootFolder.toString(),"Engine\\Build\\BatchFiles\\RunUAT.bat");
     }
 }

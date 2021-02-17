@@ -1,4 +1,4 @@
-package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
+package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_String;
 

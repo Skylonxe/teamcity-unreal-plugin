@@ -2,8 +2,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdArgument;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdRunnerConstants;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_EnginePath;
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,7 +48,7 @@ public class UBTConstants extends CmdRunnerConstants {
     }
 
     @Override
-    public Path GetExePath(Path EngineRootFolder) {
+    public Path getExePath(Path EngineRootFolder) {
         return Paths.get(EngineRootFolder.toString(),"Engine\\Binaries\\DotNET\\UnrealBuildTool.exe");
     }
 }

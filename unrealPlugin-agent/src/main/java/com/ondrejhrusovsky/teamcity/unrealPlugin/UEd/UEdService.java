@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UEd;
 
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.*;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
@@ -16,14 +18,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class UEdService extends BuildServiceAdapter {
+    UEdConstants constants;
 
     private final Set<File> myFilesToDelete = new HashSet<File>();
     @NotNull
     @Override
     public ProgramCommandLine makeProgramCommandLine() throws RunBuildException {
-      /* getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
+        getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
+        constants = UEdConstants.get();
 
-        final String PresetName = getRunnerParameters().getOrDefault(UATRunnerConstants.PRESET_KEY, "");
+        final String PresetName = getRunnerParameters().getOrDefault(constants.getPresetKey(), "");
         HashMap<String, String> relevantRunnerParameters = new HashMap<>();
         for(Map.Entry<String, String> param : getRunnerParameters().entrySet())
         {
@@ -37,34 +41,32 @@ public class UEdService extends BuildServiceAdapter {
         getLogger().message("Relevant runner parameters: " + relevantRunnerParameters.toString());
 
         final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
-        final Path RunUAT = UATRunnerConstants.GetRunUATPath(engineBaseDir);
-
-        final CmdPreset Preset = UATRunnerConstants.GetPresetByName(PresetName);
-        final String UATArguments = Preset.makeArgumentsString(relevantRunnerParameters);
         final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
-        StringBuilder scriptContent = new StringBuilder(RunUAT.toString());
+        final Path Exe = constants.getExePath(engineBaseDir);
+        final CmdPreset Preset = constants.getPresetByName(PresetName);
+        final String presetArgumentsString = Preset.makeArgumentsString(relevantRunnerParameters);
 
-        if(UATArguments.length() > 0)
+        StringBuilder fullCommandLineToRun = new StringBuilder(Exe.toString());
+
+        if(presetArgumentsString.length() > 0)
         {
-            scriptContent.append(' ');
-            scriptContent.append(UATArguments);
+            fullCommandLineToRun.append(' ');
+            fullCommandLineToRun.append(presetArgumentsString);
         }
 
-        if(uprojectFile.toString().length() > 0)
+        /*if(uprojectFile.toString().length() > 0)
         {
             scriptContent.append(" -project=\"");
             scriptContent.append(uprojectFile);
             scriptContent.append('"');
-        }
+        }*/
 
+        getLogger().message("Prepared command line: " + fullCommandLineToRun);
 
-        getLogger().message("ScriptContent: " + scriptContent);
-
-        final String script = getCustomScript(scriptContent.toString());
+        final String script = getCustomScript(fullCommandLineToRun.toString());
         setExecutableAttribute(script);
-        return new SimpleProgramCommandLine(getRunnerContext(), script, Collections.<String>emptyList());*/
-        return null;
+        return new SimpleProgramCommandLine(getRunnerContext(), script, Collections.<String>emptyList());
     }
 
     String getCustomScript(String scriptContent) throws RunBuildException {
@@ -81,11 +83,11 @@ public class UEdService extends BuildServiceAdapter {
     }
 
     private void setExecutableAttribute(@NotNull final String script) throws RunBuildException {
-       /* try {
+       try {
             TCStreamUtil.setFileMode(new File(script), "a+x");
         } catch(Throwable t) {
             throw new RunBuildException("Failed to set executable attribute for custom script '" + script + "'", t);
-        }*/
+        }
     }
 
     @Override

@@ -9,5 +9,5 @@ public abstract class CmdRunnerConstants {
     public abstract  String getDisplayName();
     public abstract String getDescription();
     public abstract List<CmdArgument> getGlobalArguments();
-    public abstract Path GetExePath(Path EngineRootFolder);
+    public abstract Path getExePath(Path EngineRootFolder);
 }

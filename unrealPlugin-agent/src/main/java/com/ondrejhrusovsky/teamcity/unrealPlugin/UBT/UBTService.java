@@ -1,6 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
-import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Arg_EnginePath;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.Util;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
@@ -39,7 +39,7 @@ public class UBTService extends BuildServiceAdapter {
         getLogger().message("Input runner parameters: " + getRunnerParameters().toString());
 
         final Path engineBaseDir = Paths.get(getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
-        final Path UBTExe = UBTConstants.get().GetExePath(engineBaseDir);
+        final Path UBTExe = UBTConstants.get().getExePath(engineBaseDir);
         final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), UBTConstants.get().getGlobalArguments());
 
         StringBuilder scriptContent = new StringBuilder(UBTExe.toString());
@@ -89,19 +89,19 @@ public class UBTService extends BuildServiceAdapter {
         return Paths.get(getBuildTempDirectory().getAbsolutePath(),"UBT_Manifest_" + getBuild().getBuildNumber() + "_" + stepIndexStr + ".xml");
     }
 
+    private Path getOutputStagingDirPath()
+    {
+        final String stepIndexStr = getEnvironmentVariables().getOrDefault("unreal.UBT.stepIndex", "0");
+        final String outputDirName = "UBT_Output_" + getBuild().getBuildNumber() + "_" + stepIndexStr;
+        return Paths.get(getBuildTempDirectory().getAbsolutePath(), outputDirName);
+    }
+
     private void setExecutableAttribute(@NotNull final String script) throws RunBuildException {
         try {
             TCStreamUtil.setFileMode(new File(script), "a+x");
         } catch(Throwable t) {
             throw new RunBuildException("Failed to set executable attribute for custom script '" + script + "'", t);
         }
-    }
-
-    @Override
-    public void beforeProcessStarted() throws RunBuildException {
-
-        super.beforeProcessStarted();
-        // something logic
     }
 
     @Override
@@ -151,7 +151,7 @@ public class UBTService extends BuildServiceAdapter {
 
         getLogger().message("Staging UBT output files symlinks in temp folder, so it can be easily published");
         final String outputDirName = "UBTOutput";
-        final Path UBTOutputDir = Paths.get(getBuildTempDirectory().getAbsolutePath(), outputDirName);
+        final Path UBTOutputDir = getOutputStagingDirPath();
 
         for(Path artifact : artifacts)
         {
@@ -164,6 +164,7 @@ public class UBTService extends BuildServiceAdapter {
                 Files.createSymbolicLink(newDest.toPath(), artifact);
             } catch (IOException e) {
                 getLogger().exception(e);
+                return; // Maybe in production for safety reasons we want to continue
             }
         }
 
