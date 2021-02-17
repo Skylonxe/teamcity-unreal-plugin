@@ -17,12 +17,12 @@ public class CmdPreset_Stage extends CmdPreset_BuildCookRun {
         friendlyName = "Stage";
         description = "Copies cooked assets, compiled binaries and other game files like configs into same folder, forming there final standalone application.";
 
-        arguments = new ArrayList<CmdArgument>(Arrays.asList(
+        arguments.addAll(new ArrayList<CmdArgument>(Arrays.asList(
                 new Arg_Client(),
                 new Arg_DedicatedServer(),
                 new Arg_Pak(),
                 new Arg_CookCultures()
-        ));
+        )));
     }
 
     @Override

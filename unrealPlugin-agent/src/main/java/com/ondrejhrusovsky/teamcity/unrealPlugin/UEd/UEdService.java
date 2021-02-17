@@ -41,7 +41,6 @@ public class UEdService extends BuildServiceAdapter {
         getLogger().message("Relevant runner parameters: " + relevantRunnerParameters.toString());
 
         final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
-        final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
         final Path Exe = constants.getExePath(engineBaseDir);
         final CmdPreset Preset = constants.getPresetByName(PresetName);
@@ -54,13 +53,6 @@ public class UEdService extends BuildServiceAdapter {
             fullCommandLineToRun.append(' ');
             fullCommandLineToRun.append(presetArgumentsString);
         }
-
-        /*if(uprojectFile.toString().length() > 0)
-        {
-            scriptContent.append(" -project=\"");
-            scriptContent.append(uprojectFile);
-            scriptContent.append('"');
-        }*/
 
         getLogger().message("Prepared command line: " + fullCommandLineToRun);
 

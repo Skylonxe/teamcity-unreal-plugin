@@ -14,11 +14,11 @@ public class CmdPreset_Build extends CmdPreset_BuildCookRun {
     CmdPreset_Build()
     {
         friendlyName = "Build (C++)";
-        arguments = new ArrayList<CmdArgument>(Arrays.asList(
+        arguments.addAll(new ArrayList<CmdArgument>(Arrays.asList(
                 new Arg_Clean(),
                 new Arg_ClientConfig(),
                 new Arg_ClientTargetPlatform()
-        ));
+        )));
     }
 
     @Override

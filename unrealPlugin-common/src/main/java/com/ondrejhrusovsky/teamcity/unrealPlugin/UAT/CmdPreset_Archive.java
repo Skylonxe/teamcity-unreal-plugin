@@ -9,8 +9,7 @@ public class CmdPreset_Archive extends CmdPreset_BuildCookRun {
     CmdPreset_Archive()
     {
         friendlyName = "Archive (zip)";
-        arguments = new ArrayList<CmdArgument>(Arrays.asList(
-
-        ));
+        arguments.addAll(new ArrayList<CmdArgument>(Arrays.asList(
+        )));
     }
 }
