@@ -1,6 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildGraph;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_String;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class Arg_BuildGraph_Script extends ArgBase_String {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
         return IfArgIsPresentAndNonEmpty(params, "-Script=\"" + params.get(toString()) + "\"");
     }
 }

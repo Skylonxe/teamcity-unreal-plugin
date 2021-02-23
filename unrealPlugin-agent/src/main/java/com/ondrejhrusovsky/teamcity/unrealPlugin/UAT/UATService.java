@@ -1,5 +1,6 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 
+import com.google.gson.Gson;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import jetbrains.buildServer.RunBuildException;
@@ -8,10 +9,15 @@ import jetbrains.buildServer.agent.runner.ProgramCommandLine;
 import jetbrains.buildServer.agent.runner.SimpleProgramCommandLine;
 import jetbrains.buildServer.util.FileUtil;
 import jetbrains.buildServer.util.TCStreamUtil;
+import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +46,13 @@ public class UATService extends BuildServiceAdapter {
         final Path engineBaseDir = Paths.get(relevantRunnerParameters.get(Arg_EnginePath.class.getSimpleName()));
         final Path RunUAT = UATConstants.get().getExePath(engineBaseDir);
         final CmdPreset preset = UATConstants.get().getPresetByName(PresetName);
-        final String UATArguments = preset.makeArgumentsString(relevantRunnerParameters);
+
+        Map<String, String> makeArgsParams = new HashMap<>();
+        makeArgsParams.putAll(relevantRunnerParameters);
+        makeArgsParams.putAll(getEnvironmentVariables());
+        makeArgsParams.putAll(getBuildParameters().getAllParameters());
+
+        final String UATArguments = preset.makeArgumentsString(relevantRunnerParameters, getLogger());
         final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
         StringBuilder scriptContent = new StringBuilder(RunUAT.toString());
@@ -57,7 +69,6 @@ public class UATService extends BuildServiceAdapter {
             scriptContent.append(uprojectFile);
             scriptContent.append('"');
         }
-
 
         getLogger().message("ScriptContent: " + scriptContent);
 

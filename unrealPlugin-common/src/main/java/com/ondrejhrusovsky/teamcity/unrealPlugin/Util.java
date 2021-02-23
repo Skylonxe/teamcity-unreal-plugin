@@ -23,7 +23,7 @@ public class Util {
 
         for(CmdArgument arg : Arguments)
         {
-            final String argString = arg.makeArgumentString(parameters);
+            final String argString = arg.makeArgumentString(parameters, null);
 
             if(!argString.isEmpty())
             {

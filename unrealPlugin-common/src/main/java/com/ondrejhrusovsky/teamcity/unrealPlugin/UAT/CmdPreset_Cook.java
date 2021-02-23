@@ -3,6 +3,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.*;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook.*;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.Util;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -90,8 +91,8 @@ public class CmdPreset_Cook extends CmdPreset_BuildCookRun {
     }
 
     @Override
-    public String makeArgumentsString(Map<String, String> params) {
-        StringBuilder result = new StringBuilder(super.makeArgumentsString(params));
+    public String makeArgumentsString(Map<String, String> params, BuildProgressLogger logger) {
+        StringBuilder result = new StringBuilder(super.makeArgumentsString(params, logger));
         Util.AppendArgToStringBuilder(result, "-cook -skipstage");
         return result.toString();
     }

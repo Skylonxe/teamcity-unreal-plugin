@@ -4,6 +4,7 @@ import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildGraph.Arg_BuildGraph_Options;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildGraph.Arg_BuildGraph_Script;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildGraph.Arg_BuildGraph_Target;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -25,8 +26,8 @@ public class CmdPreset_BuildGraph extends CmdPreset {
     }
 
     @Override
-    public String makeArgumentsString(Map<String, String> params) {
-        StringBuilder result = new StringBuilder("BuildGraph " + super.makeArgumentsString(params));
+    public String makeArgumentsString(Map<String, String> params, BuildProgressLogger logger) {
+        StringBuilder result = new StringBuilder("BuildGraph " + super.makeArgumentsString(params, logger));
         return result.toString();
     }
 }

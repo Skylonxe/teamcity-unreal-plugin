@@ -1,6 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.Custom;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_String;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class Arg_Custom_Command extends ArgBase_String {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
         return IfArgIsPresent(params, params.get(toString()));
     }
 }

@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import jetbrains.buildServer.agent.BuildProgressLogger;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public abstract class ArgBase_BoolMatrix extends CmdArgument {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
         StringBuilder allOptions = new StringBuilder();
         for(Map.Entry<String, String> e : params.entrySet())
         {

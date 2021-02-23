@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import jetbrains.buildServer.agent.BuildProgressLogger;
+
 import java.util.*;
 
 public abstract class CmdPreset {
@@ -21,11 +23,11 @@ public abstract class CmdPreset {
         return this.getClass().getSimpleName();
     }
 
-    public String makeArgumentsString(Map<String, String> params) {
+    public String makeArgumentsString(Map<String, String> params, BuildProgressLogger logger) {
         StringBuilder result = new StringBuilder();
         for(CmdArgument arg : arguments)
         {
-            String argStr = arg.makeArgumentString(params);
+            String argStr = arg.makeArgumentString(params, logger);
             if(argStr.length() > 0)
             {
                 if(result.length() > 0)

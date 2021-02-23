@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import jetbrains.buildServer.agent.BuildProgressLogger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,7 @@ public abstract class CmdArgument {
         return this.getClass().getSimpleName();
     }
 
-    public String makeArgumentString(Map<String, String> params)
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger)
     {
         return "";
     }

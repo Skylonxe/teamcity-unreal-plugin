@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import jetbrains.buildServer.agent.BuildProgressLogger;
+
 import java.util.Map;
 
 public abstract class ArgBase_StringList extends ArgBase_MultilineString {
@@ -8,7 +10,7 @@ public abstract class ArgBase_StringList extends ArgBase_MultilineString {
     public String encloseValuesWith = "";
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
         final String value = params.getOrDefault(toString(), "");
         String entries[] = value.split("\\Q" + fieldEntrySeparator + "\\E");
 

@@ -2,6 +2,7 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.Presets.Cook;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_BoolMatrix;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UnrealTypes;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Map;
 
@@ -20,8 +21,8 @@ public class Arg_CookPlatform extends ArgBase_BoolMatrix {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
-        final String allOptions = super.makeArgumentString(params);
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
+        final String allOptions = super.makeArgumentString(params, logger);
         return allOptions.length() > 0 ? "-targetplatform=" + allOptions : "";
     }
 }

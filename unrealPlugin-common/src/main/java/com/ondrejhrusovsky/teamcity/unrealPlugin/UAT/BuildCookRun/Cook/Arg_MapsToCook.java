@@ -1,7 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook;
 
-import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_Bool;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_StringList;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class Arg_MapsToCook extends ArgBase_StringList {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
-        return IfArgIsPresentAndNonEmpty(params, "-MapsToCook=" + super.makeArgumentString(params));
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
+        return IfArgIsPresentAndNonEmpty(params, "-MapsToCook=" + super.makeArgumentString(params, logger));
     }
 }

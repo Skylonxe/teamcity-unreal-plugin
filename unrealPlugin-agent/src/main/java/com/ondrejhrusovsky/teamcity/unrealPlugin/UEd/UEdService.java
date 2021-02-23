@@ -44,7 +44,7 @@ public class UEdService extends BuildServiceAdapter {
 
         final Path Exe = constants.getExePath(engineBaseDir);
         final CmdPreset Preset = constants.getPresetByName(PresetName);
-        final String presetArgumentsString = Preset.makeArgumentsString(relevantRunnerParameters);
+        final String presetArgumentsString = Preset.makeArgumentsString(relevantRunnerParameters, getLogger());
 
         StringBuilder fullCommandLineToRun = new StringBuilder(Exe.toString());
 

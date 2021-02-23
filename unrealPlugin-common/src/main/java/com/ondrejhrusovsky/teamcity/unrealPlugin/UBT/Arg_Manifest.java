@@ -1,6 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UBT;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_String;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class Arg_Manifest extends ArgBase_String {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
         return IfArgIsPresent(params, "-manifest=" + params.get(toString()));
     }
 }

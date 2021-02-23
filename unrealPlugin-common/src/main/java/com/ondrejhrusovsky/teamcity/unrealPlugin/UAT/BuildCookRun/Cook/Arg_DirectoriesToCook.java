@@ -1,6 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Cook;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_PathList;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class Arg_DirectoriesToCook extends ArgBase_PathList {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
-        return IfArgIsPresentAndNonEmpty(params, "-CookDir=" + super.makeArgumentString(params));
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
+        return IfArgIsPresentAndNonEmpty(params, "-CookDir=" + super.makeArgumentString(params, logger));
     }
 }

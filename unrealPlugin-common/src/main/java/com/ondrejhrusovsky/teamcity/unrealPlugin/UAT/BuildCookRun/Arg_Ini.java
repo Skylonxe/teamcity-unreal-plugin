@@ -1,6 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun;
 
 import com.ondrejhrusovsky.teamcity.unrealPlugin.ArgBase_StringList;
+import jetbrains.buildServer.agent.BuildProgressLogger;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class Arg_Ini extends ArgBase_StringList {
     }
 
     @Override
-    public String makeArgumentString(Map<String, String> params) {
-        return IfArgIsPresentAndNonEmpty(params, "-ini:" + super.makeArgumentString(params));
+    public String makeArgumentString(Map<String, String> params, BuildProgressLogger logger) {
+        return IfArgIsPresentAndNonEmpty(params, "-ini:" + super.makeArgumentString(params, logger));
     }
 }
