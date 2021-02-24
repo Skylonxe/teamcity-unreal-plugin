@@ -6,4 +6,5 @@
     <bean id="UATRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATRunner"/>
     <bean id="UBTRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTRunner"/>
     <bean id="UEdRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdRunner"/>
+    <bean id="GitDependenciesRunner" class="com.ondrejhrusovsky.teamcity.unrealPlugin.GitDependencies.GitDependenciesRunner"/>
 </beans>

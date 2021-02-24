@@ -7,4 +7,5 @@
     <bean id="UATFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.UATFactory"/>
     <bean id="UBTFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTFactory"/>
     <bean id="UEdFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.UEdFactory"/>
+    <bean id="GitDependenciesFactory" class="com.ondrejhrusovsky.teamcity.unrealPlugin.GitDependencies.GitDependenciesFactory"/>
 </beans>
