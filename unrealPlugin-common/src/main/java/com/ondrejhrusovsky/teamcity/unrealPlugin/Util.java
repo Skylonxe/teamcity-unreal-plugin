@@ -1,5 +1,7 @@
 package com.ondrejhrusovsky.teamcity.unrealPlugin;
 
+import jetbrains.buildServer.agent.BuildProgressLogger;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +19,13 @@ public class Util {
         }
     }
 
-    public static String parametersMapToCmdArgsString(Map<String, String> parameters, List<CmdArgument> Arguments) {
+    public static String parametersMapToCmdArgsString(Map<String, String> parameters, List<CmdArgument> Arguments, BuildProgressLogger logger) {
         HashMap<String, String> result = new HashMap<>();
         StringBuilder joinedArgsString = new StringBuilder();
 
         for(CmdArgument arg : Arguments)
         {
-            final String argString = arg.makeArgumentString(parameters, null);
+            final String argString = arg.makeArgumentString(parameters, logger);
 
             if(!argString.isEmpty())
             {

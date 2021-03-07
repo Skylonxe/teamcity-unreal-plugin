@@ -3,6 +3,8 @@ package com.ondrejhrusovsky.teamcity.unrealPlugin.UAT;
 import com.google.gson.Gson;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UBT.UBTConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.Util;
 import jetbrains.buildServer.RunBuildException;
 import jetbrains.buildServer.agent.runner.BuildServiceAdapter;
 import jetbrains.buildServer.agent.runner.ProgramCommandLine;
@@ -52,8 +54,12 @@ public class UATService extends BuildServiceAdapter {
         makeArgsParams.putAll(getEnvironmentVariables());
         makeArgsParams.putAll(getBuildParameters().getAllParameters());
 
-        final String UATArguments = preset.makeArgumentsString(relevantRunnerParameters, getLogger());
-        final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
+        final String globalArguments = Util.parametersMapToCmdArgsString(getRunnerParameters(), UATConstants.get().getGlobalArguments(), getLogger());
+        final String presetArguments = preset.makeArgumentsString(relevantRunnerParameters, getLogger());
+        final String UATArguments = presetArguments + (!globalArguments.isEmpty() ? " " + globalArguments : "");
+
+        // Now implemented using makeCommandLine
+        //final Path uprojectFile = Paths.get(relevantRunnerParameters.getOrDefault(Arg_UProjectFile.class.getSimpleName(), ""));
 
         StringBuilder scriptContent = new StringBuilder(RunUAT.toString());
 
@@ -63,12 +69,13 @@ public class UATService extends BuildServiceAdapter {
             scriptContent.append(UATArguments);
         }
 
-        if(uprojectFile.toString().length() > 0)
+        // Now implemented using makeCommandLine
+        /*if(uprojectFile.toString().length() > 0)
         {
             scriptContent.append(" -project=\"");
             scriptContent.append(uprojectFile);
             scriptContent.append('"');
-        }
+        }*/
 
         getLogger().message("ScriptContent: " + scriptContent);
 

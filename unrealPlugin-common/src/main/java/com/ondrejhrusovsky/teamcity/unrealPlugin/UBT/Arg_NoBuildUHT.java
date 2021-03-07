@@ -9,8 +9,9 @@ public class Arg_NoBuildUHT extends ArgBase_Bool {
     public Arg_NoBuildUHT()
     {
         friendlyName = "No Build UHT";
-        description = "???";
-        defaultValue = "true";
+        description = "If enabled, UBT will skip building Unreal Header Tool (UHT) first. It will expect UHT was already built and is available." +
+                "UHT is tool which allows compilation of Unreal's customized C++ code.";
+        defaultValue = "false";
     }
 
     @Override

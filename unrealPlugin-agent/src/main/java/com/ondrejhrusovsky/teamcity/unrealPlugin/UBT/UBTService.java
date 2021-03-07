@@ -40,7 +40,7 @@ public class UBTService extends BuildServiceAdapter {
 
         final Path engineBaseDir = Paths.get(getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
         final Path UBTExe = UBTConstants.get().getExePath(engineBaseDir);
-        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), UBTConstants.get().getGlobalArguments());
+        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), UBTConstants.get().getGlobalArguments(), getLogger());
 
         StringBuilder scriptContent = new StringBuilder(UBTExe.toString());
 
@@ -168,16 +168,15 @@ public class UBTService extends BuildServiceAdapter {
             }
         }
 
+        final String stepIndexStr = getEnvironmentVariables().getOrDefault("unreal.UBT.stepIndex", "0");
+        final int nextStepIndex = Integer.parseInt(stepIndexStr) + 1;
+        getLogger().message("##teamcity[setParameter name='env.unreal.UBT.stepIndex' value='" + nextStepIndex +"']");
+
         if(format == ArtifactsFormat.ARCHIVE_ZIP || format == ArtifactsFormat.ARCHIVE_7Z)
         {
-            final String stepIndexStr = getEnvironmentVariables().getOrDefault("unreal.UBT.stepIndex", "0");
-            int stepIndex = Integer.parseInt(stepIndexStr);
-
             final String archiveFormat = format == ArtifactsFormat.ARCHIVE_ZIP ? "zip" : "7z";
-            final String archiveFileName = "UBT_" + getBuild().getBuildNumber() + "_" + stepIndex + "." + archiveFormat;
+            final String archiveFileName = "UBT_" + getBuild().getBuildNumber() + "_" + (nextStepIndex - 1) + "." + archiveFormat;
 
-            stepIndex++;
-            getLogger().message("##teamcity[setParameter name='env.unreal.UBT.stepIndex' value='" + stepIndex +"']");
             getLogger().message("##teamcity[publishArtifacts '" + UBTOutputDir.toAbsolutePath().toString() + "/** => " + archiveFileName +"']");
         }
         else

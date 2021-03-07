@@ -33,7 +33,7 @@ public class GitDependenciesService extends BuildServiceAdapter {
 
         final Path engineBaseDir = Paths.get(getRunnerParameters().get(Arg_EnginePath.class.getSimpleName()));
         final Path Exe = GitDependenciesConstants.get().getExePath(engineBaseDir);
-        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), GitDependenciesConstants.get().getGlobalArguments());
+        final String cmdArgs = Util.parametersMapToCmdArgsString(getRunnerParameters(), GitDependenciesConstants.get().getGlobalArguments(), getLogger());
 
         final String runOnlyOnce = getRunnerParameters().getOrDefault("run_only_once", "");
 
@@ -57,15 +57,15 @@ public class GitDependenciesService extends BuildServiceAdapter {
 
         try {
             final String ignoreFileContent = getRunnerParameters().getOrDefault("ignore_file", "");
+            ignoreFileContent.replace("\"", "");
+            final String ignoreFilePathStr = Paths.get(getCheckoutDirectory().toPath().toString(), engineBaseDir.toString(),".gitdepsignore").toString();
+            final File ignoreFile = new File(ignoreFilePathStr);
+            getLogger().message("Deleting old ignore file");
+            FileUtil.delete(ignoreFile);
 
             if(!ignoreFileContent.isEmpty())
             {
-                ignoreFileContent.replace("\"", "");
-                final String ignoreFilePathStr = Paths.get(getCheckoutDirectory().toPath().toString(), engineBaseDir.toString(),".gitdepsignore").toString();
                 getLogger().message("Writing git dependencies ignore file to: " + ignoreFilePathStr);
-
-                final File ignoreFile = new File(ignoreFilePathStr);
-                FileUtil.delete(ignoreFile);
                 myFilesToDelete.add(ignoreFile);
 
                 FileWriter ignoreFileWriter = new FileWriter(ignoreFilePathStr);

@@ -7,6 +7,7 @@ import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPresetConstants;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Compile;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_CompileEditor;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.Arg_Ini;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UAT.BuildCookRun.MetaArg_AdditionalArguments;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -60,7 +61,8 @@ public class UATConstants extends CmdPresetConstants {
                 new Arg_WarningsAsErrors(),
                 new Arg_Compile(),
                 new Arg_CompileEditor(),
-                new Arg_Ini()
+                new Arg_Ini(),
+                new MetaArg_AdditionalArguments()
         ));
     }
 

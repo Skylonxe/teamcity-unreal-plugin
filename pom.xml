@@ -7,6 +7,8 @@
   <packaging>pom</packaging>
   <properties>
       <teamcity-version>2020.2.2-SNAPSHOT</teamcity-version>
+      <teamcity-path-testlib>E:\Servers\TeamCity\PluginDev\devPackage\tests</teamcity-path-testlib>
+      <teamcity-path-lib>E:\Servers\TeamCity\PluginDev\webapps\ROOT\WEB-INF\lib</teamcity-path-lib>
   </properties>
   <repositories>
     <repository>
@@ -27,7 +29,7 @@
               <artifactId>teamcity-sdk-maven-plugin</artifactId>
               <version>0.4.2</version>
               <configuration>
-                  <!-- <teamcityDir>/path/to/tc/distro</teamcityDir> -->
+                  <teamcityDir>E:\Servers\TeamCity\PluginDev</teamcityDir>
               </configuration>
           </plugin>
       </plugins>
