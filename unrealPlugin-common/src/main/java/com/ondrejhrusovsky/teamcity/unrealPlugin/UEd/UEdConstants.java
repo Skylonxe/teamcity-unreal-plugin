@@ -4,6 +4,7 @@ import com.ondrejhrusovsky.teamcity.unrealPlugin.Arg_EnginePath;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdArgument;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPreset;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.CmdPresetConstants;
+import com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.Presets.CompileAllBlueprints.Preset_CompileAllBlueprints;
 import com.ondrejhrusovsky.teamcity.unrealPlugin.UEd.Presets.Cook.Preset_Cook;
 
 import java.nio.file.Path;
@@ -44,7 +45,10 @@ public class UEdConstants extends CmdPresetConstants {
     @Override
     public List<CmdPreset> getPresets() {
         return new ArrayList<>(
-                asList(new Preset_Cook())
+                asList(
+                        new Preset_Cook(),
+                        new Preset_CompileAllBlueprints()
+                )
         );
     }
 
